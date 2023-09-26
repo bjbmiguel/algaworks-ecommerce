@@ -1,3 +1,4 @@
+/*
 package com.algaworks.ecommerce;
 
 import java.util.EnumSet;
@@ -79,3 +80,5 @@ public class InicializadorSpringWeb implements WebApplicationInitializer {
                 DispatcherType.INCLUDE, DispatcherType.ASYNC);
     }
 }
+
+ */
