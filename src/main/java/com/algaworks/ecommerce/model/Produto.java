@@ -5,12 +5,17 @@ import com.algaworks.ecommerce.listener.GenericoListener;
 import com.algaworks.ecommerce.model.converter.BooleanToSimNaoConverter;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.Length;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.annotations.Type;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import org.hibernate.Length;
+import org.hibernate.type.descriptor.jdbc.BinaryJdbcType;
+import org.hibernate.usertype.UserType;
 
 import java.math.BigDecimal;
+import java.sql.Types;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -54,11 +59,11 @@ import java.util.List;
 @EntityListeners({ GenericoListener.class })
 @Entity
 @Table(name = "produto",
-        uniqueConstraints = { @UniqueConstraint(name = "unq_nome", columnNames = { "nome" }) },
-        indexes = { @Index(name = "idx_nome", columnList = "nome") })
+        uniqueConstraints = { @UniqueConstraint(name = "unq_produto_nome", columnNames = { "nome" }) },
+        indexes = { @Index(name = "idx_produto_nome", columnList = "nome") })
 public class Produto extends EntidadeBaseInteger {
 
-    @PastOrPresent  // Vai aceitar um data no presente (durante a persist...) e no passado ( durante o update)
+    @PastOrPresent
     @NotNull
     @Column(name = "data_criacao", updatable = false, nullable = false)
     private LocalDateTime dataCriacao;
@@ -71,7 +76,7 @@ public class Produto extends EntidadeBaseInteger {
     @Column(length = 100, nullable = false)
     private String nome;
 
-    @Lob
+    // @Lob
     @Column(length = Length.LONG32)
     private String descricao;
 
@@ -80,7 +85,13 @@ public class Produto extends EntidadeBaseInteger {
 
     @Lob
     @Column(length = 1000)
+    @JdbcTypeCode(Types.VARBINARY)
     private byte[] foto;
+
+    @Convert(converter = BooleanToSimNaoConverter.class)
+    @NotNull
+    @Column(length = 3, nullable = false)
+    private Boolean ativo = Boolean.FALSE;
 
     @ManyToMany
     @JoinTable(name = "produto_categoria",
@@ -92,12 +103,6 @@ public class Produto extends EntidadeBaseInteger {
 
     @OneToOne(mappedBy = "produto")
     private Estoque estoque;
-
-    @Convert(converter = BooleanToSimNaoConverter.class)
-    @NotNull
-    @Column(length = 3, nullable = false)
-    private Boolean ativo = Boolean.FALSE;
-
 
     @ElementCollection
     @CollectionTable(name = "produto_tag",

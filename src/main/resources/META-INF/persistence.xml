@@ -9,18 +9,18 @@
         <mapping-file>META-INF/consultas/categoria.xml</mapping-file>
 
         <shared-cache-mode>ALL</shared-cache-mode>
+
         <validation-mode>CALLBACK</validation-mode>
 
-<!-- algaworks_ecommerce -->
         <properties>
             <property name="jakarta.persistence.jdbc.url"
-                      value="jdbc:mysql://localhost/algaworks_ecommerce?createDatabaseIfNotExist=true&amp;useTimezone=true&amp;serverTimezone=UTC"/>
-            <property name="jakarta.persistence.jdbc.user" value="root"/>
+                      value="jdbc:postgresql://localhost/algaworks_ecommerce"/>
+            <property name="jakarta.persistence.jdbc.user" value="postgres"/>
             <property name="jakarta.persistence.jdbc.password" value="root"/>
-            <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
 
             <property name="jakarta.persistence.schema-generation.database.action"
-                      value="drop-and-create"/>
+                      value="none"/>
 
             <property name="jakarta.persistence.schema-generation.create-source"
                       value="metadata-then-script"/>
@@ -29,7 +29,6 @@
 
             <property name="jakarta.persistence.schema-generation.create-script-source"
                       value="META-INF/banco-de-dados/script-criacao.sql"/>
-
             <property name="jakarta.persistence.schema-generation.drop-script-source"
                       value="META-INF/banco-de-dados/script-remocao.sql"/>
 
@@ -43,15 +42,15 @@
             <property name="jakarta.persistence.schema-generation.scripts.drop-target"
                       value="C:/tmp/sql/script-remocao-exportado.sql"/>
 
-            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
 
-            <property name="hibernate.multiTenancy" value="DATABASE" />
-            <property name="hibernate.tenant_identifier_resolver"
-                      value="com.algaworks.ecommerce.hibernate.EcmCurrentTenantIdentifierResolver"/>
-            <property name="hibernate.multi_tenant_connection_provider"
-                      value="com.algaworks.ecommerce.hibernate.EcmMachineMultiTenantConnectionProvider"/>
+            <!--            <property name="hibernate.multiTenancy" value="DATABASE" />-->
+            <!--            <property name="hibernate.tenant_identifier_resolver"-->
+            <!--                      value="com.algaworks.ecommerce.hibernate.EcmCurrentTenantIdentifierResolver"/>-->
+            <!--            <property name="hibernate.multi_tenant_connection_provider"-->
+            <!--                      value="com.algaworks.ecommerce.hibernate.EcmMachineMultiTenantConnectionProvider"/>-->
 
-            <property name="hibernate.hikari.maximumPoolSize" value="16"/>
+            <property name="hibernate.hikari.maximumPoolSize" value="8"/>
             <property name="hibernate.connection.provider_class"
                       value="org.hibernate.hikaricp.internal.HikariCPConnectionProvider"/>
 
@@ -60,10 +59,10 @@
             <property name="hibernate.jakarta.cache.provider"
                       value="org.ehcache.jsr107.EhcacheCachingProvider"/>
             <property name="hibernate.javax.cache.uri"
-                      value="META-INF/ehcache.xml"/>
+                      value="file:/home/banguela/intellijIDEAProjectos/algaworks-ecommerce/src/main/resources/META-INF/ehcache.xml"/>
 
             <property name="hibernate.show_sql" value="true"/>
-            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.format_sql" value="false"/>
         </properties>
     </persistence-unit>
 </persistence>

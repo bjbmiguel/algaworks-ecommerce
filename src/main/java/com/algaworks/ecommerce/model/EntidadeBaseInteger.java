@@ -1,9 +1,14 @@
 package com.algaworks.ecommerce.model;
 
-import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+
+import jakarta.persistence.*;
+
+import java.time.LocalDateTime;
+import java.util.Calendar;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -13,11 +18,10 @@ public class EntidadeBaseInteger {
 
     @EqualsAndHashCode.Include
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "hibernate_sequence")
+    @SequenceGenerator(name = "hibernate_sequence", allocationSize = 1)
     private Integer id;
 
-   @Version
-   private Integer versao; //Nota que podemos usar, o Long, Date, LocalDateTime como tipo de dados para anotação @Version
-
-
+    @Version
+    private Integer versao;
 }
