@@ -3,15 +3,11 @@ package com.algaworks.ecommerce.model;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.annotations.Type;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
-
-import java.sql.Types;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -19,7 +15,13 @@ import java.util.Date;
 @Setter
 @Entity
 @Table(name = "nota_fiscal")
-public class NotaFiscal extends EntidadeBaseInteger {
+public class NotaFiscal {
+
+    @Id
+    private Integer id;
+
+    @Version
+    private Integer versao;
 
     @NotNull
     @MapsId
@@ -32,9 +34,8 @@ public class NotaFiscal extends EntidadeBaseInteger {
     private Pedido pedido;
 
     @NotEmpty
-    @Column(length = 1000, nullable = false)
     @Lob
-    @JdbcTypeCode(Types.VARBINARY)
+    @Column(length = 1000, nullable = false)
     private byte[] xml;
 
     @PastOrPresent

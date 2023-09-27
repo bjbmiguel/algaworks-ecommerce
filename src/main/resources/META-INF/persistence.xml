@@ -2,22 +2,22 @@
 <persistence xmlns="https://jakarta.ee/xml/ns/persistence"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_1.xsd"
-             version="3.1">
+             version="3.0">
     <persistence-unit name="Ecommerce-PU">
         <mapping-file>META-INF/consultas/pedido.xml</mapping-file>
         <mapping-file>META-INF/consultas/produto.xml</mapping-file>
         <mapping-file>META-INF/consultas/categoria.xml</mapping-file>
 
-        <shared-cache-mode>ALL</shared-cache-mode>
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
 
         <validation-mode>CALLBACK</validation-mode>
 
         <properties>
             <property name="jakarta.persistence.jdbc.url"
-                      value="jdbc:postgresql://localhost/algaworks_ecommerce"/>
-            <property name="jakarta.persistence.jdbc.user" value="postgres"/>
+                      value="jdbc:mysql://localhost/algaworks_ecommerce?createDatabaseIfNotExist=true&amp;useTimezone=true&amp;serverTimezone=UTC"/>
+            <property name="jakarta.persistence.jdbc.user" value="root"/>
             <property name="jakarta.persistence.jdbc.password" value="root"/>
-            <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+            <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
 
             <property name="jakarta.persistence.schema-generation.database.action"
                       value="none"/>
@@ -42,7 +42,9 @@
             <property name="jakarta.persistence.schema-generation.scripts.drop-target"
                       value="C:/tmp/sql/script-remocao-exportado.sql"/>
 
-            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
+            <property name="eclipselink.logging.level" value="FINE"/>
+
+            <!--            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>-->
 
             <!--            <property name="hibernate.multiTenancy" value="DATABASE" />-->
             <!--            <property name="hibernate.tenant_identifier_resolver"-->
@@ -50,19 +52,19 @@
             <!--            <property name="hibernate.multi_tenant_connection_provider"-->
             <!--                      value="com.algaworks.ecommerce.hibernate.EcmMachineMultiTenantConnectionProvider"/>-->
 
-            <property name="hibernate.hikari.maximumPoolSize" value="8"/>
-            <property name="hibernate.connection.provider_class"
-                      value="org.hibernate.hikaricp.internal.HikariCPConnectionProvider"/>
+            <!--            <property name="hibernate.hikari.maximumPoolSize" value="8"/>-->
+            <!--            <property name="hibernate.connection.provider_class"-->
+            <!--                      value="org.hibernate.hikaricp.internal.HikariCPConnectionProvider"/>-->
 
-            <property name="hibernate.cache.region.factory_class"
-                      value="jcache"/>
-            <property name="hibernate.jakarta.cache.provider"
-                      value="org.ehcache.jsr107.EhcacheCachingProvider"/>
-            <property name="hibernate.javax.cache.uri"
-                      value="file:/home/banguela/intellijIDEAProjectos/algaworks-ecommerce/src/main/resources/META-INF/ehcache.xml"/>
+            <!--            <property name="hibernate.cache.region.factory_class"-->
+            <!--                      value="jcache"/>-->
+            <!--            <property name="hibernate.jakarta.cache.provider"-->
+            <!--                      value="org.ehcache.jsr107.EhcacheCachingProvider"/>-->
+            <!--            <property name="hibernate.javax.cache.uri"-->
+            <!--                      value="file:/seu/caminho/para/o/projeto/da/aula/src/main/resources/META-INF/ehcache.xml"/>-->
 
-            <property name="hibernate.show_sql" value="true"/>
-            <property name="hibernate.format_sql" value="false"/>
+            <!--            <property name="hibernate.show_sql" value="true"/>-->
+            <!--            <property name="hibernate.format_sql" value="false"/>-->
         </properties>
     </persistence-unit>
 </persistence>

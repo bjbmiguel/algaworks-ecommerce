@@ -2,7 +2,6 @@ package com.algaworks.ecommerce.util;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.internal.util.StringHelper;
 
 import java.util.ArrayList;
 import java.util.List;
